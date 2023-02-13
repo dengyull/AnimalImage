@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navlay"
+    app:startDestination="@id/welcome">
+
+    <fragment
+        android:id="@+id/welcome"
+        android:name="com.example.myapplication.Welcome"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcome_to_screen2"
+            app:destination="@id/screen2" />
+    </fragment>
+    <fragment
+        android:id="@+id/screen2"
+        android:name="com.example.myapplication.screen2"
+        android:label="fragment_screen2"
+        tools:layout="@layout/fragment_screen2" >
+        <action
+            android:id="@+id/action_screen2_to_game"
+            app:destination="@id/game" />
+        <action
+            android:id="@+id/action_screen2_to_welcome"
+            app:destination="@id/welcome" />
+        <argument
+            android:name="score"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/game"
+        android:name="com.example.myapplication.game"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_game_to_screen2"
+            app:destination="@id/screen2" />
+        <action
+            android:id="@+id/action_game_to_calculate"
+            app:destination="@id/calculate" />
+    </fragment>
+    <fragment
+        android:id="@+id/score"
+        android:name="com.example.myapplication.score"
+        android:label="fragment_score"
+        tools:layout="@layout/fragment_score" >
+        <action
+            android:id="@+id/action_score_to_screen2"
+            app:destination="@id/screen2" />
+        <argument
+            android:name="score"
+            app:argType="integer"
+            android:defaultValue="3" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculate"
+        android:name="com.example.myapplication.calculate"
+        android:label="fragment_calculate"
+        tools:layout="@layout/fragment_calculate" >
+        <action
+            android:id="@+id/action_calculate_to_score"
+            app:destination="@id/score" />
+        <argument
+            android:name="score"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_calculate_to_screen2"
+            app:destination="@id/screen2" />
+    </fragment>
+</navigation>
