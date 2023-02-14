@@ -49,7 +49,7 @@ class game : Fragment() {
             _root.findViewById<Button>(R.id.button8).isVisible = false
             _root.findViewById<Button>(R.id.button7).isVisible = false
             _root.findViewById<Button>(R.id.sheepView).isVisible = false
-            num = (0..10).random()
+            num = (1..19).random()
             //handler.post(runnable)
             counts = num
             countDownTimer.start()
