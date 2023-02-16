@@ -148,7 +148,7 @@ class game : Fragment() {
         super.onDestroyView()
     }
     fun game(){
-        num = (0..10).random()
+        num = (1..19).random()
         for (i in 0..num){
             //sheep display
         }
