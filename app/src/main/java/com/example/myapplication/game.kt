@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -60,10 +62,19 @@ class game : Fragment() {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.setType("image/*");
             //sheepView.setImageURI("")
+            resultLauncher.launch(intent)
 
         }
         return _root
 
+    }
+
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+            sheepView.setImageURI(result.data?.data)
+        }
     }
 
     suspend fun mysimple(x:Int,y:Int,zx:Int,zy:Int,num:Int,sheepView:ImageView,btn:Button){
@@ -154,4 +165,6 @@ class game : Fragment() {
         }
         findNavController().navigate(R.id.action_game_to_calculate)
     }
+
+
 }
