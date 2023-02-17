@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,14 +27,18 @@ class score : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val _root = inflater.inflate(R.layout.fragment_score, container, false)
-        //x = arguments?.getInt("score", 5)
+        //store score
         x = requireArguments().getInt("score")
+        var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
+        sharedPref.edit().putInt("score", x).apply()
 
 
+        //back screen 2
         _root.findViewById<Button>(R.id.button6).setOnClickListener {
             val bundle = bundleOf("score" to x)
             findNavController().navigate(R.id.action_score_to_screen2,bundle)
         }
+        //show score
         _root.findViewById<Button>(R.id.button5).setOnClickListener {
             _root.findViewById<TextView>(R.id.textView3).setText("the score of the last game is " + x.toString())
             _root.findViewById<TextView>(R.id.textView3).gravity

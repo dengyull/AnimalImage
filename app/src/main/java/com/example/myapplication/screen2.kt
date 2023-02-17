@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -30,15 +32,19 @@ class screen2 : Fragment() {
         // Inflate the layout for this fragment
         val _root = inflater.inflate(R.layout.fragment_screen2, container, false)
         _root.findViewById<Button>(R.id.button4).setOnClickListener {
-            findNavController().navigate(R.id.action_screen2_to_welcome)
-            //_root.findViewById<Button>(R.id.button4).setText("s")
+            findNavController().navigate(R.id.action_screen2_to_welcome)//this button will switch to start page
         }
+        //the folloeing get the score from previous game
         x = requireArguments().getInt("score")
+        var sharedPref : SharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE);
+        var t = 0
+        x = sharedPref.getInt("score", 0)
+
         _root.findViewById<Button>(R.id.button2).setOnClickListener {
-            findNavController().navigate(R.id.action_screen2_to_game)
+            findNavController().navigate(R.id.action_screen2_to_game)//this button will switch to the game
         }
         _root.findViewById<Button>(R.id.button3).setOnClickListener {
-            _root.findViewById<TextView>(R.id.textView2).setText("the score of the last game is " + x.toString())
+            _root.findViewById<TextView>(R.id.textView2).setText("the score of the last game is " + x.toString())//to show the score of the last game
             _root.findViewById<TextView>(R.id.textView2).gravity
         }
         return _root

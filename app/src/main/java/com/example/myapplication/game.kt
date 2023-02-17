@@ -58,7 +58,9 @@ class game : Fragment() {
             _root.findViewById<Button>(R.id.button7).text=num.toString()
 
         }
+        //button to change image
         _root.findViewById<Button>(R.id.button8).setOnClickListener {
+
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.setType("image/*");
             //sheepView.setImageURI("")
@@ -69,6 +71,7 @@ class game : Fragment() {
 
     }
 
+    //function to get the image and change
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
@@ -77,39 +80,7 @@ class game : Fragment() {
         }
     }
 
-    suspend fun mysimple(x:Int,y:Int,zx:Int,zy:Int,num:Int,sheepView:ImageView,btn:Button){
-        for (i in 0..num) {
-            sheepView.x = (zx..x- zx).random().toFloat()
-            sheepView.y = (zy..y-zy).random().toFloat()
-            btn.text=i.toString()
-            delay(200)
-        }
-    }
-    private val handler: Handler = Handler()
-    private var count = 0
-
-    private val runnable: Runnable = object : Runnable {
-        override fun run() {
-            var xvalue = _root.width
-            var yvalue = _root.height
-            var sheepx = sheepView.width
-            var sheepy = sheepView.height
-            var vx = (5 ..30).random()
-            for (i in 0..num){
-                sheepView.x = (sheepx..xvalue- sheepx).random().toFloat()
-                sheepView.y = (sheepy..yvalue-sheepy).random().toFloat()
-                handler.postDelayed(this, vx.toLong())
-            }
-            //findNavController().navigate(R.id.action_game_to_calculate,bundle)
-        }
-    }
-    private val runnable2: Runnable = object : Runnable {
-        override fun run() {
-            val bundle = bundleOf("score" to num)
-            findNavController().navigate(R.id.action_game_to_calculate,bundle)
-        }
-    }
-
+    //a timer, to upgrade screen and switch fragment after 1 min.
     private val countDownTimer = object : CountDownTimer(60000, 1000) {
 
         override fun onTick(millisUntilFinished: Long) {
@@ -129,42 +100,16 @@ class game : Fragment() {
             }
 
         }
-
+        //switch fragment
         override fun onFinish() {
             // Navigate to the next screen
             val bundle = bundleOf("score" to num)
             findNavController().navigate(R.id.action_game_to_calculate,bundle)
         }
     }
-    /*
-    private val runnable: Runnable = object : Runnable {
-        override fun run() {
-            count++
-            var xvalue = _root.width
-            var yvalue = _root.height
-            var sheepx = sheepView.width
-            var sheepy = sheepView.height
-            sheepView.x = (sheepx..xvalue- sheepx).random().toFloat()
-            sheepView.y = (sheepy..yvalue-sheepy).random().toFloat()
-            // Update UI here
-            if (count < num) {
-                handler.postDelayed(this, 1000)
-            } else {
-                //findNavController().graph.addArgument("bundle",5)
-                x = true;
-            }
-        }
-    }*/
+
     override fun onDestroyView() {
         super.onDestroyView()
     }
-    fun game(){
-        num = (1..19).random()
-        for (i in 0..num){
-            //sheep display
-        }
-        findNavController().navigate(R.id.action_game_to_calculate)
-    }
-
 
 }

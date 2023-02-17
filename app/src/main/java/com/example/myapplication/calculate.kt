@@ -31,8 +31,9 @@ class calculate : Fragment() {
         val _root = inflater.inflate(R.layout.fragment_calculate, container, false)
         //x = arguments?.getInt("score", 5)
         x = requireArguments().getInt("score")
-        _root.findViewById<TextView>(R.id.textView4).text = _root.findViewById<TextView>(R.id.textView4).text.toString() + " Hint: " + x.toString()
+        //_root.findViewById<TextView>(R.id.textView4).text = _root.findViewById<TextView>(R.id.textView4).text.toString() + " Hint: " + x.toString() //test case
         _root.findViewById<Button>(R.id.btn_sure).setOnClickListener {
+            //get score and calculate
             var ans = _root.findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
             var ass = ans.toInt()
             var sco = 0
@@ -41,8 +42,7 @@ class calculate : Fragment() {
             } else {
                 sco = ( (2 * x - ass)  * 100 / x)
             }
-
-
+            //sent to next fragment
             val bundle = bundleOf("score" to sco)
             findNavController().navigate(R.id.action_calculate_to_score,bundle)
         }
