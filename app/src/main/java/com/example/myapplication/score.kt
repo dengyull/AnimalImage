@@ -44,7 +44,6 @@ class score : Fragment() {
             _root.findViewById<TextView>(R.id.textView3).gravity
         }
 
-
         return _root
 
     }
